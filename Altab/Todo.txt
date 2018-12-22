@@ -1,0 +1,5 @@
+Agregar una clase centralizada para separar la UI de implementación.
+Manejar el listbox sin tener el foco.
+Sacarle la posibilidad de que el listbox tenga foco
+Pensar ideas
+Hacer que la aplicaciòn cierre y se abra con comandos del teclado

@@ -1,0 +1,33 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Altab", "Altab\Altab.csproj", "{42E9E4A8-02E4-4A3B-ACA7-598BE38E104A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UI", "UI\UI.csproj", "{B7623AEC-E962-42BE-AEB2-E600392EC238}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{422C375E-1EE9-4722-81AA-2C12A439534E}"
+	ProjectSection(SolutionItems) = preProject
+		Todo.txt = Todo.txt
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{42E9E4A8-02E4-4A3B-ACA7-598BE38E104A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{42E9E4A8-02E4-4A3B-ACA7-598BE38E104A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{42E9E4A8-02E4-4A3B-ACA7-598BE38E104A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{42E9E4A8-02E4-4A3B-ACA7-598BE38E104A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B7623AEC-E962-42BE-AEB2-E600392EC238}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B7623AEC-E962-42BE-AEB2-E600392EC238}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B7623AEC-E962-42BE-AEB2-E600392EC238}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B7623AEC-E962-42BE-AEB2-E600392EC238}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
