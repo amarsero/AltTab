@@ -14,6 +14,7 @@ namespace UI
     public partial class Index : Form
     {
         Altab.Altab altab = new Altab.Altab();
+        readonly Rectangle iconSize = new Rectangle(0, 0, 16, 16);
         public Index()
         {
             InitializeComponent();
@@ -32,8 +33,14 @@ namespace UI
             Brush brush = ((e.State & DrawItemState.Selected) == DrawItemState.Selected) ?
                           Brushes.Red : new SolidBrush(e.BackColor);
             g.FillRectangle(brush, e.Bounds);
+            if (entry.Icon != null)
+            {
+                e.Graphics.DrawIcon(entry.Icon, new Rectangle(0, e.Bounds.Y, 16, 16));
+            }
+            Rectangle textPosition = e.Bounds;
+            textPosition.Offset(16, 0);
             e.Graphics.DrawString(entry.Name, e.Font,
-                     new SolidBrush(e.ForeColor), e.Bounds, StringFormat.GenericDefault);
+                     new SolidBrush(e.ForeColor), textPosition, StringFormat.GenericDefault);
             e.DrawFocusRectangle();
         }
 
