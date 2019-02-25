@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Altab.Entries;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -13,7 +14,7 @@ namespace Altab
         public List<Entry> SearchAll(string search)
         {
             regex = new Regex(search, RegexOptions.IgnoreCase, new TimeSpan(0, 0, 5));
-            return entries.Where(list => regex.IsMatch(list.Name)).ToList();
+            return entries.Where(list => regex.IsMatch(list.Name)).OrderBy(x => x.Name).ToList();
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using IWshRuntimeLibrary;
+﻿using Altab.Entries;
+using IWshRuntimeLibrary;
 using Shell32;
 using System;
 using System.Collections.Generic;
@@ -24,10 +25,28 @@ namespace Altab
             Entry entry;
             foreach (var filePath in Directory.EnumerateFiles(path))
             {
-                if (_deposit.entries.Find(x => x.FullPath == filePath) == null)
+                switch (Path.GetExtension(filePath))
                 {
-                    entry = new Entry(filePath);
-                    _deposit.entries.Add(entry);
+                    case ".lnk":
+                    case ".exe":
+                        {
+                            entry = EntryFactory.GetEntry(filePath);
+                            if (_deposit.entries.Any(x => x.FullPath == filePath || entry.Name == x.Name))
+                            {
+                                continue;
+                            }
+                            if (entry is ShortcutEntry && _deposit.entries.OfType<ShortcutEntry>().Any(x => x.TargetPath == ((ShortcutEntry)entry).TargetPath))
+                            {
+                                continue;
+                            }
+                            _deposit.entries.Add(EntryFactory.GetEntry(filePath));
+                            break;
+                        }
+                    default:
+                        {
+
+                        }
+                        break;
                 }
             }
         }

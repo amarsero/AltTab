@@ -43,7 +43,9 @@
     <Compile Include="Altab.cs" />
     <Compile Include="Crawler.cs" />
     <Compile Include="Deposit.cs" />
-    <Compile Include="Entry.cs" />
+    <Compile Include="Entries\Entry.cs" />
+    <Compile Include="Entries\EntryFactory.cs" />
+    <Compile Include="Entries\ShorcutEntry.cs" />
     <Compile Include="Indexer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

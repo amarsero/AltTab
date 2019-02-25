@@ -15,7 +15,12 @@ namespace Altab
         public Altab()
         {
             Crawler = new Crawler(Deposit);
-            Task.Run(() => Crawler.CrawlNewPath(@"D:\Users\Agus\Desktop"));
+            Task.Run(() => {
+                Crawler.CrawlNewPath(@"D:\Users\Agus\Desktop");
+                Crawler.CrawlNewPath(@"D:\Users\Public\Desktop");
+                Crawler.CrawlNewPath(@"C:\Users\Pun\Desktop");
+                Crawler.CrawlNewPath(@"C:\Users\Public\Desktop");
+            });
         }
     }
 }
