@@ -10,12 +10,12 @@ namespace Altab
     public class Altab
     {
         public Deposit Deposit { get; } = new Deposit();
+        public Crawler Crawler { get; private set; }
 
         public Altab()
         {
-            Deposit.entries.Add(new Entry() { Name = "Tuviejaajajaj" });
-            Deposit.entries.Add(new Entry() { Name = "Tu hermana" });
-            Deposit.entries.Add(new Entry() { Name = "Mi padrino", Icon = Icon.ExtractAssociatedIcon(@"D:\Program Files (x86)\Mutant Year Zero - Road To Heaven\ZoneUE4\Binaries\Win64\ZoneUE4-Win64-Shipping.exe") });
+            Crawler = new Crawler(Deposit);
+            Task.Run(() => Crawler.CrawlNewPath(@"D:\Users\Agus\Desktop"));
         }
     }
 }

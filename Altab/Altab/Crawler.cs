@@ -1,4 +1,6 @@
-﻿using System;
+﻿using IWshRuntimeLibrary;
+using Shell32;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -17,10 +19,17 @@ namespace Altab
             _deposit = deposit;
         }
 
-        async public Task CrawlNewPath(string path)
+        public void CrawlNewPath(string path)
         {
-            Directory.EnumerateFiles(path);
+            Entry entry;
+            foreach (var filePath in Directory.EnumerateFiles(path))
+            {
+                if (_deposit.entries.Find(x => x.FullPath == filePath) == null)
+                {
+                    entry = new Entry(filePath);
+                    _deposit.entries.Add(entry);
+                }
+            }
         }
-        //Icon.ExtractAssociatedIcon(@"D:\Program Files (x86)\Mutant Year Zero - Road To Heaven\ZoneUE4\Binaries\Win64\ZoneUE4-Win64-Shipping.exe")
     }
 }

@@ -18,8 +18,14 @@ namespace UI
         public Index()
         {
             InitializeComponent();
+            InitAltab();
         }
-        
+
+        private void InitAltab()
+        {
+            listBox1.DataSource = altab.Deposit.SearchAll("");
+        }
+
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
             listBox1.DataSource = altab.Deposit.SearchAll(textBox1.Text);
