@@ -15,16 +15,15 @@ namespace UI
     public partial class Index : Form
     {
         Altab.Altab altab = new Altab.Altab();
-        readonly Rectangle iconSize = new Rectangle(0, 0, 16, 16);
         public Index()
         {
             InitializeComponent();
             InitAltab();
         }
 
+
         private void InitAltab()
         {
-            listBox1.DataSource = altab.Deposit.SearchAll("");
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
@@ -53,12 +52,29 @@ namespace UI
 
         private void textBox1_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyData == Keys.Escape)
+            switch (e.KeyData)
             {
-                e.Handled = true;
-                e.SuppressKeyPress = true;
-                Minimize();
-                return;
+                case Keys.Escape:
+                    e.Handled = true;
+                    e.SuppressKeyPress = true;
+                    Minimize();
+                    return;
+                case Keys.Up:
+                    if (listBox1.Items.Count > 0)
+                        listBox1.SelectedIndex = listBox1.SelectedIndex == 0 ? listBox1.Items.Count - 1 : listBox1.SelectedIndex - 1;
+                    break;
+                case Keys.Down:
+                    if (listBox1.Items.Count > 0)
+                        listBox1.SelectedIndex = listBox1.SelectedIndex == listBox1.Items.Count - 1 ? 0 : listBox1.SelectedIndex + 1;
+                    break;
+
+                case Keys.Enter:
+                    ((Entry)listBox1.SelectedItem).Run();
+                    e.Handled = true;
+                    e.SuppressKeyPress = true;
+                    Minimize();
+                    //Don't
+                    break;
             }
         }
 
@@ -66,6 +82,30 @@ namespace UI
         {
             textBox1.Text = "";
             WindowState = FormWindowState.Minimized;
+        }
+
+        private void OnPressEnter()
+        {
+            ((Entry)listBox1.SelectedItem).Run();
+            Minimize();
+        }
+
+        private void textBox1_Leave(object sender, EventArgs e)
+        {
+            textBox1.Select();
+        }
+
+        private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            switch (e.KeyChar)
+            {
+                case '\r': //Enter
+                    ((Entry)listBox1.SelectedItem).Run();
+                    e.Handled = true;
+                    Minimize();
+                    //Don't
+                    break;
+            }
         }
     }
 }
