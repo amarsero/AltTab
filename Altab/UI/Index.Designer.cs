@@ -77,6 +77,8 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Index";
             this.TransparencyKey = System.Drawing.Color.Fuchsia;
+            this.Deactivate += new System.EventHandler(this.Index_Deactivate);
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Index_FormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();
 

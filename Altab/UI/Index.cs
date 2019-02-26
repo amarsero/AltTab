@@ -9,21 +9,44 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Altab;
 using Altab.Entries;
+using UI.GlobalKeyboardHook;
 
 namespace UI
 {
     public partial class Index : Form
     {
         Altab.Altab altab = new Altab.Altab();
+        KeyboardHook hook = new KeyboardHook();
+
         public Index()
         {
             InitializeComponent();
             InitAltab();
+            InitUI();
         }
-
 
         private void InitAltab()
         {
+        }
+
+        private void InitUI()
+        {        // register the event that is fired after the key press.
+            hook.KeyPressed +=
+                new EventHandler<KeyPressedEventArgs>(hook_KeyPressed);
+            // register the control + alt + F12 combination as hot key.
+            hook.RegisterHotKey(GlobalKeyboardHook.ModifierKeys.Win, Keys.V);
+        }
+
+        void hook_KeyPressed(object sender, KeyPressedEventArgs e)
+        {
+            if (WindowState == FormWindowState.Minimized)
+            {
+                WindowState = FormWindowState.Normal;
+                textBox1.Focus();
+            } else
+            {
+                Minimize();
+            }
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
@@ -106,6 +129,16 @@ namespace UI
                     //Don't
                     break;
             }
+        }
+
+        private void Index_FormClosing(object sender, FormClosingEventArgs e)
+        {
+
+        }
+
+        private void Index_Deactivate(object sender, EventArgs e)
+        {
+            Minimize();
         }
     }
 }

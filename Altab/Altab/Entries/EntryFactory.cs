@@ -39,6 +39,7 @@ namespace Altab.Entries
                         }
                         else
                         {
+                            entry.TargetPath = fullPath;
                             entry.Icon = Icon.ExtractAssociatedIcon(fullPath);
                         }
                         return entry;

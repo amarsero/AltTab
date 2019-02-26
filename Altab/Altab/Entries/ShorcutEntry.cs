@@ -16,7 +16,14 @@ namespace Altab.Entries
 
         public override void Run()
         {
-            Process.Start(FullPath);
+            if (TargetPath != null)
+            {
+                Process.Start(TargetPath);
+            }
+            else
+            {
+                Process.Start(FullPath);
+            }
         }
     }
 }
