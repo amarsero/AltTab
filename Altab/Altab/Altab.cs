@@ -21,6 +21,7 @@ namespace Altab
                 Crawler.CrawlNewPath(@"C:\Users\Pun\Desktop");
                 Crawler.CrawlNewPath(@"C:\Users\Public\Desktop");
             });
+            Deposit.entries.Add(new Entries.GoogleSearchEntry());
         }
     }
 }

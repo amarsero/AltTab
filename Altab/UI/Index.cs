@@ -91,13 +91,14 @@ namespace UI
                         listBox1.SelectedIndex = listBox1.SelectedIndex == listBox1.Items.Count - 1 ? 0 : listBox1.SelectedIndex + 1;
                     break;
 
-                case Keys.Enter:
-                    ((Entry)listBox1.SelectedItem).Run();
-                    e.Handled = true;
-                    e.SuppressKeyPress = true;
-                    Minimize();
-                    //Don't
-                    break;
+                //case Keys.Enter:
+                //    //((Entry)listBox1.SelectedItem).Run();
+                //    System.Diagnostics.Process.Start("https://www.google.com/search?q=hola+mi+amor");
+                //    e.Handled = true;
+                //    e.SuppressKeyPress = true;
+                //    Minimize();
+                //    //Don't
+                //    break;
             }
         }
 

@@ -18,6 +18,12 @@ namespace Altab.Entries
             return Name;
         }
 
-        public abstract void Run();
+        /// <summary>
+        /// Runs the entry
+        /// </summary>
+        /// <returns>Returns true if the entry runs succesfully</returns>
+        public abstract bool Run();
+
+        public abstract bool Matches(string search);
     }
 }

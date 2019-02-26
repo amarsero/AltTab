@@ -10,13 +10,21 @@ namespace Altab
     {
 
         public List<Entry> entries = new List<Entry>();
-        private Regex regex = new Regex("");
 
         public List<Entry> SearchAll(string search)
         {
-            if (search == "") return entries.ToList();
-            regex = new Regex(search, RegexOptions.IgnoreCase, new TimeSpan(0, 0, 5));
-            return entries.Where(list => regex.IsMatch(list.Name)).OrderBy(x => x.Name).ToList();
+            //if (search == "") return entries.OrderBy(x => x.Name).ToList();
+            List<Entry> list = new List<Entry>();
+
+            for (int i = 0; i < entries.Count; i++)
+            {
+                if (entries[i].Matches(search))
+                {
+                    list.Add(entries[i]);
+                }
+            }
+
+            return list.OrderBy(x => x.Name).ToList();
         }
     }
 }

@@ -45,6 +45,7 @@
     <Compile Include="Deposit.cs" />
     <Compile Include="Entries\Entry.cs" />
     <Compile Include="Entries\EntryFactory.cs" />
+    <Compile Include="Entries\GoogleSearchEntry.cs" />
     <Compile Include="Entries\ShorcutEntry.cs" />
     <Compile Include="Indexer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

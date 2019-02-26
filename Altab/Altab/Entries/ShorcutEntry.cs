@@ -7,6 +7,7 @@ using System.Drawing;
 using System.IO;
 using System.Diagnostics;
 using IWshRuntimeLibrary;
+using System.Text.RegularExpressions;
 
 namespace Altab.Entries
 {
@@ -14,15 +15,28 @@ namespace Altab.Entries
     {
         public string TargetPath { get; internal set; }
 
-        public override void Run()
+        public override bool Matches(string search)
         {
-            if (TargetPath != null)
+            return Name.ToUpper().Contains(search.ToUpper());
+        }
+
+        public override bool Run()
+        {
+            try
             {
-                Process.Start(TargetPath);
+                if (TargetPath != null)
+                {
+                    Process.Start(TargetPath);
+                }
+                else
+                {
+                    Process.Start(FullPath);
+                }
+                return true;
             }
-            else
+            catch (Exception)
             {
-                Process.Start(FullPath);
+                return false;
             }
         }
     }
