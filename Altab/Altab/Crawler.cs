@@ -31,15 +31,15 @@ namespace Altab
                     case ".exe":
                         {
                             entry = EntryFactory.GetEntry(filePath);
-                            if (_deposit.entries.Any(x => x.FullPath == filePath || entry.Name == x.Name))
+                            if (_deposit.Entries.Any(x => x.FullPath == filePath || entry.Name == x.Name))
                             {
                                 continue;
                             }
-                            if (entry is ShortcutEntry && _deposit.entries.OfType<ShortcutEntry>().Any(x => x.TargetPath == ((ShortcutEntry)entry).TargetPath))
+                            if (entry is ShortcutEntry && _deposit.Entries.OfType<ShortcutEntry>().Any(x => x.TargetPath == ((ShortcutEntry)entry).TargetPath))
                             {
                                 continue;
                             }
-                            _deposit.entries.Add(EntryFactory.GetEntry(filePath));
+                            _deposit.Entries.Add(EntryFactory.GetEntry(filePath));
                             break;
                         }
                     default:

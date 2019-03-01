@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -15,13 +15,15 @@ namespace Altab
         public Altab()
         {
             Crawler = new Crawler(Deposit);
-            Task.Run(() => {
+            Task.Run(() =>
+            {
                 Crawler.CrawlNewPath(@"D:\Users\Agus\Desktop");
                 Crawler.CrawlNewPath(@"D:\Users\Public\Desktop");
                 Crawler.CrawlNewPath(@"C:\Users\Pun\Desktop");
                 Crawler.CrawlNewPath(@"C:\Users\Public\Desktop");
             });
-            Deposit.entries.Add(new Entries.GoogleSearchEntry());
+            Deposit.Entries.Add(new Entries.GoogleSearchEntry());
+            Deposit.Entries.Add(new Entries.YoutubeSearchEntry());
         }
     }
 }

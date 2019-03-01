@@ -8,18 +8,17 @@ using System.Threading.Tasks;
 
 namespace Altab.Entries
 {
-    public class GoogleSearchEntry : Entry
+    public class YoutubeSearchEntry : Entry
     {
-        private static Regex _regex = new Regex("(?::g |google search )(.+)", RegexOptions.IgnoreCase);
-        const string Case1 = ":G ";
-        const string Case2 = "GOOGLE SEARCH ";
-        const string BaseName = "Google Search (:g)";
-        
+        private static Regex _regex = new Regex("(?::y |youtube search )(.+)", RegexOptions.IgnoreCase);
+        const string Case1 = ":Y ";
+        const string Case2 = "YOUTUBE SEARCH ";
+        const string BaseName = "Youtube Search (:y)";
         string _search = null;
 
-        public GoogleSearchEntry()
+        public YoutubeSearchEntry()
         {
-            Name = "Google Search (:g)";
+            Name = "Youtube Search (:y)";
         }
 
         public override bool Matches(string search)
@@ -35,7 +34,7 @@ namespace Altab.Entries
                 if (_regex.IsMatch(search))
                 {
                     _search = _regex.Match(search).Groups[1].Value.Trim();
-                    Name = $"Google \"{_search}\"";
+                    Name = $"Youtube \"{_search}\"";
                 } else
                 {
                     _search = null;
@@ -51,7 +50,7 @@ namespace Altab.Entries
             if (_search == null) return false;
             try
             {
-                System.Diagnostics.Process.Start("https://www.google.com/search?q=" + WebUtility.UrlEncode(_search));
+                System.Diagnostics.Process.Start("https://www.youtube.com/results?search_query=" + WebUtility.UrlEncode(_search));
                 return true;
             }
             catch (Exception)
