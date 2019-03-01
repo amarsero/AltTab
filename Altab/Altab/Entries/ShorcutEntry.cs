@@ -22,6 +22,7 @@ namespace Altab.Entries
 
         public override bool Run()
         {
+            ++RunCount;
             try
             {
                 if (TargetPath != null)

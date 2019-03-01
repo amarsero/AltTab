@@ -13,6 +13,8 @@ namespace Altab.Entries
         public Icon Icon { get; internal set; }
         public string FullPath { get; internal set; }
 
+        internal int RunCount { get; set; }
+
         public override string ToString()
         {
             return Name;
