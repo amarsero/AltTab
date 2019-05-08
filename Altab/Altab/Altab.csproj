@@ -49,6 +49,7 @@
     <Compile Include="Entries\GoogleSearchEntry.cs" />
     <Compile Include="Entries\ShorcutEntry.cs" />
     <Compile Include="Indexer.cs" />
+    <Compile Include="Persistence.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SpellChecker.cs" />
   </ItemGroup>

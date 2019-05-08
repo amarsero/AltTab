@@ -15,7 +15,7 @@ namespace UI
 {
     public partial class Index : Form
     {
-        Altab.Altab altab = new Altab.Altab();
+        Altab.Altab altab = new Altab.Altab(Application.StartupPath);
         KeyboardHook hook = new KeyboardHook();
 
         public Index()
@@ -51,7 +51,7 @@ namespace UI
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-            listBox1.DataSource = altab.Deposit.SearchAll(textBox1.Text);
+            listBox1.DataSource = altab.Search(textBox1.Text);
         }
 
         private void listBox1_DrawItem(object sender, DrawItemEventArgs e)

@@ -57,7 +57,6 @@ namespace Altab
                                 if (!list.Contains(Entries[i]))
                                     list.Add(Entries[i]);
                                 add = false;
-                                Console.WriteLine("222222 found: " + entry);
                                 break;
                             }
                         }
@@ -88,7 +87,6 @@ namespace Altab
                                     if (!list.Contains(Entries[i]))
                                         list.Add(Entries[i]);
                                     add = false;
-                                    Console.WriteLine("222222 found: " + entry);
                                     break;
                                 }
                             }
