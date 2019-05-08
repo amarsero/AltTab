@@ -7,14 +7,13 @@ using System.Threading.Tasks;
 
 namespace Altab.Entries
 {
+    [Serializable]
     public abstract class Entry
     {
         public string Name { get; internal set; }
         public Icon Icon { get; internal set; }
         public string FullPath { get; internal set; }
-
         internal int RunCount { get; set; }
-
         public override string ToString()
         {
             return Name;

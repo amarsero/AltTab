@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace Altab.Entries
 {
+    [Serializable]
     public class YoutubeSearchEntry : Entry
     {
         private static Regex _regex = new Regex("(?::y |youtube search )(.+)", RegexOptions.IgnoreCase);

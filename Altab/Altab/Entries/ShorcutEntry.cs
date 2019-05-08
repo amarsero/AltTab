@@ -11,6 +11,7 @@ using System.Text.RegularExpressions;
 
 namespace Altab.Entries
 {
+    [Serializable]
     public class ShortcutEntry : Entry
     {
         public string TargetPath { get; internal set; }

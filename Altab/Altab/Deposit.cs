@@ -7,19 +7,15 @@ using System.Text.RegularExpressions;
 
 namespace Altab
 {
+    [Serializable]
     public class Deposit
     {
-
         public List<Entry> Entries { get; set; } = new List<Entry>();
-        internal long Count { get; set; }
-
         public List<Entry> SearchAll(string search)
         {
             if (search == "") return Entries.OrderBy(x => x.RunCount).ThenBy(x => x.Name).ToList();
             List<Entry> list = new List<Entry>();
-
-            Stopwatch stopwatch = Stopwatch.StartNew();
-
+            
             for (int i = 0; i < Entries.Count; i++)
             {
                 if (Entries[i].Matches(search))
@@ -95,6 +91,24 @@ namespace Altab
                 }
             }
             return list.OrderBy(x => x.Name).ToList();
+        }
+
+        internal void RemoveDuplicates()
+        {
+            for (int i = 0; i < Entries.Count; i++)
+            {
+                for (int j = Entries.Count - 1; j > i; j--)
+                {
+                    if (Entries[i].FullPath == Entries[j].FullPath && Entries[j].FullPath != null ||
+                        Entries[i].Name == Entries[j].Name) {
+                        Entries.RemoveAt(j);
+                    }
+                }
+            }
+        }
+
+        internal void Update(Deposit deposit) {
+            Entries = deposit.Entries;
         }
     }
 }

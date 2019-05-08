@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace Altab.Entries
 {
+    [Serializable]
     public class GoogleSearchEntry : Entry
     {
         private static Regex _regex = new Regex("(?::g |google search )(.+)", RegexOptions.IgnoreCase);

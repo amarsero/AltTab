@@ -1,15 +1,15 @@
 ﻿using System;
 using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 
 namespace Altab
 {
     [Serializable]
     public class Persistence
-    { 
-        [NonSerialized]
-        private readonly Deposit _deposit;
+    {
+        private Deposit _deposit;
         private readonly string startupPath;
-
+        private string SavePath => startupPath + "\\save.sav";
         public Persistence(Deposit deposit, string startupPath)
         {
             this._deposit = deposit;
@@ -18,14 +18,19 @@ namespace Altab
 
         public void Save()
         {
-            System.Runtime.Serialization.Formatters.Binary.BinaryFormatter formatter = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
-            FileStream fileStream = new FileStream(startupPath + "save.sav", FileMode.Create);
-            formatter.Serialize(fileStream, this);
+            BinaryFormatter formatter = new BinaryFormatter();
+            using FileStream fileStream = new FileStream(SavePath, FileMode.Create);
+            formatter.Serialize(fileStream, _deposit);
             fileStream.Close();
-            fileStream = new FileStream(startupPath + "save.sav", FileMode.Open);
-            string text = new StreamReader(fileStream).ReadToEnd();
-            fileStream.Position = 0;
-            Persistence per = (Persistence)formatter.Deserialize(fileStream);
+        }
+
+        public void Load()
+        {
+            if (!File.Exists(SavePath))
+                return;
+            BinaryFormatter formatter = new BinaryFormatter();
+            using FileStream fileStream = new FileStream(SavePath, FileMode.Open);
+            _deposit.Update((Deposit)formatter.Deserialize(fileStream));
         }
     }
 }
