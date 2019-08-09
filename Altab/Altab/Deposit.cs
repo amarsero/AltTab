@@ -1,4 +1,5 @@
-﻿using Altab.Entries;
+﻿using Altab.Auxiliaries;
+using Altab.Entries;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -11,16 +12,34 @@ namespace Altab
     public class Deposit
     {
         public List<Entry> Entries { get; set; } = new List<Entry>();
+        public ulong TotalRunCount;
         public List<Entry> SearchAll(string search)
         {
-            if (search == "") return Entries.OrderBy(x => x.RunCount).ThenBy(x => x.Name).ToList();
-            List<Entry> list = new List<Entry>();
-            
+            if (search == "") return Entries.OrderBy(x => x.RunCount).ToList();
+            SortedLinkedList<float, Entry> list = new SortedLinkedList<float, Entry>();
+            string[] searchSplit = search.ToUpper().Split(' ');
+            bool added;
             for (int i = 0; i < Entries.Count; i++)
             {
-                if (Entries[i].Matches(search))
+                added = false;
+                string[] split = Entries[i].Name.ToUpper().Split(' ');
+                for (int j = 0; j < split.Length; j++)
                 {
-                    list.Add(Entries[i]);
+                    for (int k = 0; k < searchSplit.Length; k++)
+                    {
+                        if (split[j] == searchSplit[k])
+                        {
+                            added = true;
+                            list.Add(Entries[i].RunCount+1 * 20,Entries[i]);
+                            break;
+                        }
+                    }
+                    if (added)
+                        break;
+                }
+                if (!added && Entries[i].Matches(search))
+                {
+                    list.Add((Entries[i].RunCount + 1)/2, Entries[i]);
                 }
             }
 
@@ -29,7 +48,7 @@ namespace Altab
                 search = search.ToUpper();
                 string[] split = search.Split(' ');
                 List<string>[] listOfEdits = new List<string>[split.Length];
-                bool add = false;
+                added = false;
                 for (int k = 0; k < split.Length; k++)
                 {
                     if (split[k].Length < 4) continue;
@@ -44,15 +63,17 @@ namespace Altab
                             {
                                 if (entry == listOfEdits[k][j])
                                 {
-                                    add = true;
+                                    added = true;
                                     break;
                                 }
                             }
-                            if (add)
+                            if (added)
                             {
-                                if (!list.Contains(Entries[i]))
-                                    list.Add(Entries[i]);
-                                add = false;
+                                if (!list.ContainsValue(Entries[i]))
+                                {
+                                    list.Add((Entries[i].RunCount + 1) / 4, Entries[i]);
+                                }
+                                added = false;
                                 break;
                             }
                         }
@@ -61,6 +82,7 @@ namespace Altab
 
                 if (list.Count < 3 && search.Length < 11)
                 {
+                    added = false;
                     for (int k = 0; k < split.Length; k++)
                     {
                         if (listOfEdits[k] == null) continue;
@@ -74,15 +96,17 @@ namespace Altab
                                 {
                                     if (entry == listOfEdits[k][j])
                                     {
-                                        add = true;
+                                        added = true;
                                         break;
                                     }
                                 }
-                                if (add)
+                                if (added)
                                 {
-                                    if (!list.Contains(Entries[i]))
-                                        list.Add(Entries[i]);
-                                    add = false;
+                                    if (!list.ContainsValue(Entries[i]))
+                                    {
+                                        list.Add((Entries[i].RunCount + 1) / 8, Entries[i]);
+                                    }
+                                    added = false;
                                     break;
                                 }
                             }
@@ -90,7 +114,7 @@ namespace Altab
                     }
                 }
             }
-            return list.OrderBy(x => x.Name).ToList();
+            return list.ToList();
         }
 
         internal void RemoveDuplicates()
@@ -100,14 +124,16 @@ namespace Altab
                 for (int j = Entries.Count - 1; j > i; j--)
                 {
                     if (Entries[i].FullPath == Entries[j].FullPath && Entries[j].FullPath != null ||
-                        Entries[i].Name == Entries[j].Name) {
+                        Entries[i].Name == Entries[j].Name)
+                    {
                         Entries.RemoveAt(j);
                     }
                 }
             }
         }
 
-        internal void Update(Deposit deposit) {
+        internal void Update(Deposit deposit)
+        {
             Entries = deposit.Entries;
         }
     }

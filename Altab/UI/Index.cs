@@ -43,7 +43,8 @@ namespace UI
             {
                 WindowState = FormWindowState.Normal;
                 textBox1.Focus();
-            } else
+            }
+            else
             {
                 Minimize();
             }
@@ -91,14 +92,14 @@ namespace UI
                         listBox1.SelectedIndex = listBox1.SelectedIndex == listBox1.Items.Count - 1 ? 0 : listBox1.SelectedIndex + 1;
                     break;
 
-                //case Keys.Enter:
-                //    //((Entry)listBox1.SelectedItem).Run();
-                //    System.Diagnostics.Process.Start("https://www.google.com/search?q=hola+mi+amor");
-                //    e.Handled = true;
-                //    e.SuppressKeyPress = true;
-                //    Minimize();
-                //    //Don't
-                //    break;
+                    //case Keys.Enter:
+                    //    //((Entry)listBox1.SelectedItem).Run();
+                    //    System.Diagnostics.Process.Start("https://www.google.com/search?q=hola+mi+amor");
+                    //    e.Handled = true;
+                    //    e.SuppressKeyPress = true;
+                    //    Minimize();
+                    //    //Don't
+                    //    break;
             }
         }
 
@@ -110,7 +111,7 @@ namespace UI
 
         private void OnPressEnter()
         {
-            ((Entry)listBox1.SelectedItem).Run();
+            Run();
             Minimize();
         }
 
@@ -124,7 +125,7 @@ namespace UI
             switch (e.KeyChar)
             {
                 case '\r': //Enter
-                    ((Entry)listBox1.SelectedItem).Run();
+                    Run();
                     e.Handled = true;
                     Minimize();
                     //Don't
@@ -132,6 +133,11 @@ namespace UI
             }
         }
 
+        private void Run()
+        {
+            ((Entry)listBox1.SelectedItem).Run();
+            altab.Persistence.Save();
+        }
         private void Index_FormClosing(object sender, FormClosingEventArgs e)
         {
 

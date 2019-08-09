@@ -43,6 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Altab.cs" />
+    <Compile Include="Auxiliaries\SortedLinkedList.cs" />
     <Compile Include="Crawler.cs" />
     <Compile Include="Deposit.cs" />
     <Compile Include="Entries\Entry.cs" />
